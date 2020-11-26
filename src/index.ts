@@ -7,6 +7,8 @@ import { getUserFromApi } from './tuple-structures/error-handling';
 import { findStudent } from './fabric-method/with-carry';
 import './partial/extend-standart-functions';
 import { Sheduler } from './partial/scheduler';
+import { countWords } from './composition/simple-compose';
+import { processProducts, Product } from './composition/simple-pipe';
 
 runExample(() => simpleTuple, 'simple tuple');
 runExample(() => typedTuple, 'typed tuple');
@@ -17,8 +19,14 @@ runExample(() => getUserFromApi(), 'try to get user (can return error by Pair st
 
 runExample(() => findStudent('222-44-4444'), 'fabric method');
 
-// @ts-disable
 runExample(() => 'ABC'.explode(), 'Partial for extending standart js lib');
 runExample(() => Number(4).addPostfix('руб.'), 'Partial for extending standart js lib');
 
 runExample(() => Sheduler.delay5(() => console.log('sheduler after 5 second')), 'Partial for extending standart js lib');
+
+runExample(() => countWords('hello user'), 'Simple composition with compose');
+
+runExample(() => processProducts([
+  { name: 'Apple', active: false},
+  { name: 'Milk', active: false}
+]), 'Simple pipe');
