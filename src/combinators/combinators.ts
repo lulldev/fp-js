@@ -33,35 +33,33 @@ export const sendSmsCode = R.either(sendCode, fallbackNotification);
  * TODO: 151-152 page.
  */
 
-
 /*
   Condition mapping
 */
 export const calculateFreeze = R.cond([
   [R.equals(0), R.always('water freezes at 0°C')],
   [R.equals(100), R.always('water boils at 100°C')],
-  [R.T, temp => 'nothing special happens at ' + temp + '°C']
+  [R.T, (temp) => 'nothing special happens at ' + temp + '°C'],
 ]);
 
 /*
   Fork-combinator (pipe)
 */
-const fork = function(join: Function, func1: Function, func2: Function){
-  return function(val: any) {
-     return join(func1(val), func2(val));
+const fork = function (join: Function, func1: Function, func2: Function) {
+  return function (val: any) {
+    return join(func1(val), func2(val));
   };
 };
 
 const toLetterGrade = (grade: number) => {
-  if (grade >= 90) return 'A'
-  if (grade >= 80) return 'B'
-  if (grade >= 70) return 'C'
-  if (grade >= 60) return 'D'
-  return 'F'
-}
+  if (grade >= 90) return 'A';
+  if (grade >= 80) return 'B';
+  if (grade >= 70) return 'C';
+  if (grade >= 60) return 'D';
+  return 'F';
+};
 
-const computeAverageGrade =
-    R.compose(toLetterGrade, fork(R.divide, R.sum, R.length));
-
-computeAverageGrade([99, 80, 89]);
-
+export const computeAverageGrade = R.compose(
+  toLetterGrade,
+  fork(R.divide, R.sum, R.length),
+);

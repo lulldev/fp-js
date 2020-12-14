@@ -1,4 +1,10 @@
-import { identityParam, tapRun, sendSmsCode, calculateFreeze } from './combinators';
+import {
+  identityParam,
+  tapRun,
+  sendSmsCode,
+  calculateFreeze,
+  computeAverageGrade,
+} from './combinators';
 
 describe('I-combinator', () => {
   it('Should return function param', () => {
@@ -29,6 +35,12 @@ describe('OR-combinator: sendSmsCode', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     expect(sendSmsCode('4321')).toBeFalsy();
     expect(consoleSpy).toHaveBeenCalledWith('Failed sms sending');
+  });
+});
+
+describe('FORK-combinator: computeAverageGrade', () => {
+  it('Should compute average grade and return "B"', () => {
+    expect(computeAverageGrade([99, 80, 89])).toEqual('B');
   });
 });
 
