@@ -8,7 +8,8 @@ import { findStudent } from './fabric-method/with-carry';
 import './partial/extend-standart-functions';
 import { Sheduler } from './partial/scheduler';
 import { countWords } from './composition/simple-compose';
-import { processProducts, Product } from './composition/simple-pipe';
+import { processProducts } from './composition/simple-pipe';
+import { identityParam, tapRun, calculateFreeze } from './combinators/combinators';
 
 runExample(() => simpleTuple, 'simple tuple');
 runExample(() => typedTuple, 'typed tuple');
@@ -30,3 +31,13 @@ runExample(() => processProducts([
   { name: 'Apple', active: false},
   { name: 'Milk', active: false}
 ]), 'Simple pipe');
+
+// combinators
+runExample(() => identityParam('123'), 'I-combinator (identity)');
+runExample(() => tapRun(1000), 'K-combinator (tap)');
+// runExample(() => sendSmsCode(), 'OR-combinator (alt)');
+// runExample(() => R.pipe(
+//   calculateFreeze(0),
+//   () => calculateFreeze(100),
+//   () => calculateFreeze(50)),
+// , 'Condition combinator (by ramda cond)');
