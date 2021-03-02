@@ -6,6 +6,7 @@ describe('Fabric method by carring: fabric method for findStudent', () => {
       ssn: '222-44-4444',
       fullname: 'Sidorov Mikhail',
       age: 18,
+      address: 'Samara',
     });
   });
 });

@@ -1,13 +1,14 @@
 import * as R from 'ramda';
 import _ from 'lodash';
 
-interface Student {
+export interface Student {
   ssn: string;
   fullname: string;
   age: number;
+  address: string;
 }
 
-interface IDatabase<T> {
+export interface IDatabase<T> {
   records: T[];
 }
 
@@ -22,22 +23,23 @@ abstract class Database<T> implements IDatabase<T> {
 class StudentDatabase extends Database<Student> {
   constructor() {
     super([
-      { ssn: '444-44-4444', fullname: 'Ivanov Ivan', age: 20 },
-      { ssn: '222-44-4444', fullname: 'Sidorov Mikhail', age: 18 },
+      { ssn: '444-44-4444', fullname: 'Ivanov Ivan', age: 20, address: 'Moscow' },
+      { ssn: '222-44-4444', fullname: 'Sidorov Mikhail', age: 18, address: 'Samara' },
     ]);
   }
 }
 
 // data objects
-const db = new StudentDatabase();
+export const db = new StudentDatabase();
 
 const studentsArr: Student[] = [
-  { ssn: '444-44-4444', fullname: 'Ivanov Ivan', age: 20 },
-  { ssn: '222-44-4444', fullname: 'Sidorov Mikhail', age: 18 },
+  { ssn: '444-44-4444', fullname: 'Ivanov Ivan', age: 20, address: 'Moscow' },
+  { ssn: '222-44-4444', fullname: 'Sidorov Mikhail', age: 18, address: 'Samara' },
 ];
 
-const find = (db: IDatabase<Student>, fieldName: string) =>
-  _.find(db.records, { fieldName });
+export const find = (db: IDatabase<Student>, fieldName: string) => {
+  return _.find(db.records, { fieldName });
+};
 
 // fetchStudentsFromDb :: DB - (String -> Student)
 export const fetchStudentsFromDb = R.curry((db: IDatabase<Student>, ssn: string) =>

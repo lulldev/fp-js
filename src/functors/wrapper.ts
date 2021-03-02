@@ -12,6 +12,7 @@ export class Wrapper {
     return f(this.value);
   }
 
+  // fmap :: (A -> B) -> Wrapper(A) -> Wrapper(B)
   fmap(f: Function) {
     return new Wrapper(f(this.value));
   }
